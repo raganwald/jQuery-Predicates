@@ -41,3 +41,6 @@ Or perhaps this:
 In short, [jQuery Predicates][pred] adds two queries to every jQuery selection: `.exists()` returns true if the selection has at least one element, and `.does_not_exist()` returns true if the selection is empty (for convenience, jQuery Predicates also defines the synonyms `.exist()` and `do_not_exist()`).
 
 And naturally, jQuery Predicates plays well with jQuery Combinators. Using both, you now have access to `.ergo()`, `.when()`, `.exists()`, and `.does_not_exist()` for discriminating between empty and non-empty selections.
+
+[comb]: http://github.com/raganwald/jQuery-Combinators
+[pred]: http://github.com/raganwald/jQuery-Predicates
