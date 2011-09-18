@@ -1,46 +1,35 @@
 jQuery Predicates
 ===
 
-With the [jQuery Combinators][comb] plug in, you can refactor if statements into fluent jQuery chaining calls. For example, given:
+[jQuery Predicates][pred] adds two new methods to jQuery: **exists** returns true if the selection is not empty. For example, `$('.foo:visible').exists()` returns true if there are any elements of class `foo` that are also visible. **do\_not\_exist** returns true if the selection is empty. For example, `$('input.invalid').do_not_exist()` returns true if there are no `input` elements with class `invalid`. For convenience, there are synonyms `.exist()` and `.does_not_exist()`, so your code can give a hint as to whether you expect there to be one or many elements.
 
-    var updated_killed_count = function (killed_stones) {
-      // ...
-      // some code updating a counter on the board
-      // ...
-      alert("Congratulations, you have killed " + killed_stones + ' stone(s).');
-    }
+So you can write this:
 
-You can turn this:
+    outstanding_tasks = $('.task.outstanding')
 
-    var killed_stones = board
-      .find('.killed')
-        .removeClass('black white');
-    if (killed_stones.length)
-      updated_killed_count(killed_stones);
-
-Into this:
-
-    board
-      .find('.killed')
-        .ergo(updated_killed_count)
-        .removeClass('black white');
-        
-That's nice: `.ergo` converts a test of existence into a guarded method call that chains fluently. However, sometimes you still want an old-fashioned `if` statement or anything else relying on testing existence. And if you are going to use something like an if statement to test for the existence of DOM elements, you might as well have some semantic sugar.
-
-Thus, [jQuery Predicates][pred]. With jQuery Predicates in your jQuery quiver, you can write this:
-
-    if (killed_stones.exists())
-      updated_killed_count(killed_stones);
+    if (outstanding_tasks.exist())
+      update_to_do_list(outstanding_tasks);
     
 Or perhaps this:
 
-    while (stones.into(adjacents).do_not_exist()) {
+    while (outstanding_tasks.do_not_exist()) {
       // ...
     }
 
-In short, [jQuery Predicates][pred] adds two queries to every jQuery selection: `.exists()` returns true if the selection has at least one element, and `.does_not_exist()` returns true if the selection is empty (for convenience, jQuery Predicates also defines the synonyms `.exist()` and `do_not_exist()`).
+See for yourself:
 
-And naturally, jQuery Predicates plays well with jQuery Combinators. Using both, you now have access to `.ergo()`, `.when()`, `.exists()`, and `.does_not_exist()` for discriminating between empty and non-empty selections.
+    ;(function (jq_fn) {		
+    	jq_fn.exists = function () {
+    		return !!(this.length);
+    	};
+    	jq_fn.exist = jq_fn.exists;
+    	jq_fn.do_not_exist = function () {
+    		return !(this.length);
+    	};
+    	jq_fn.does_not_exist = jq_fn.do_not_exist;
+    })(jQuery.fn);
+
+p.s. jQuery Predicates plays well with [jQuery Combinators][comb]'s `.ergo(...)` and `.when(..)` methods.
 
 [comb]: http://github.com/raganwald/jQuery-Combinators
 [pred]: http://github.com/raganwald/jQuery-Predicates
