@@ -28,6 +28,8 @@ See for yourself:
     	};
     	jq_fn.does_not_exist = jq_fn.do_not_exist;
     })(jQuery.fn);
+    
+If you don't want to use jQuery Predicates, by all means continue testing for `$('.foo:visible').length` or `$('input.invalid').length == 0`. But wouldn't you agree that it's more elegant to have code that says exactly what it means?
 
 p.s. jQuery Predicates plays well with [jQuery Combinators][comb]'s `.ergo(...)` and `.when(..)` methods.
 
