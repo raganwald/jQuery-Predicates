@@ -36,5 +36,7 @@ If you don't want to use jQuery Predicates, by all means continue testing for `$
 
 p.s. jQuery Predicates plays well with [jQuery Combinators][comb]'s `.ergo(...)` and `.when(..)` methods.
 
+p.p.s I'm writing a book called [CoffeeScript Ristretto](http://leanpub.com/coffeescript-ristretto). Check it out!
+
 [comb]: http://github.com/raganwald/jQuery-Combinators
 [pred]: http://github.com/raganwald/jQuery-Predicates
